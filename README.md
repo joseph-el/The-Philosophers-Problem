@@ -48,7 +48,7 @@
 * [Summary](#summary)
 
  ## About project
-- This project is about the Dining Philosophers problem is a classic OS problem that’s usuallu stated in very non-OS terms:
+- This project is about the ``Dining Philosophers problem`` is a classic OS problem that’s usuallu stated in very non-OS terms:
 There are N philosphers sitting around a circular table eating spaghetti and discussing philosphy. The problem is that each philosopher needs 2 forks to eat, and there are only N forks, one between each 2 philosophers. Design an algorithm that the philosophers can follow that insures that none starves as long as each philosopher eventually stops eating, and such that the maximum number of philosophers can eat at once.
 
 ## Understanding Concepts
@@ -56,18 +56,18 @@ There are N philosphers sitting around a circular table eating spaghetti and dis
 #### What is a Thread?
 - An execution thread is a logical sequence of instructions inside a process that is automatically managed by the operating system’s kernel. A regular sequential program has a single thread, but modern operating systems allow us to create several threads in our programs, all of which run in parallel.
 ##### > Using POSIX Threads
-- The standard interface in C to manipulate threads is POSIX with its <pthread.h> library. It contains around sixty functions to create and join threads, as well as to manage their shared memory. We will only study a fraction of these in this article. In order to compile a program using this library, we can’t forget to link it with -pthread:
+- The standard interface in C to manipulate threads is POSIX with its ``<pthread.h>`` library. It contains around sixty functions to create and join threads, as well as to manage their shared memory. We will only study a fraction of these in this article. In order to compile a program using this library, we can’t forget to link it with -pthread:
 ```Shell
 gcc -pthread test.c
 ```
 ##### > Creating a Thread
-- We can create a new thread from any other thread of the program with the pthread_create function. Its prototype is:
+- We can create a new ``thread`` from any other thread of the program with the ``pthread_create`` function. Its prototype is:
 ```C
 int pthread_create(pthread_t *restrict thread, const pthread_attr_t *restrict attr, void *(*start_routine)(void *), void *restrict arg);
 ```
-- When the pthread_create function ends, the thread variable we gave it should contain the newly created thread’s ID.
+- When the ``pthread_create`` function ends, the thread variable we gave it should contain the newly created thread’s ID.
 ##### > Joining Threads
--In order to block the execution of a thread until another thread finishes, we can use the pthread_join function:
+-In order to block the execution of a thread until another thread finishes, we can use the ``pthread_join`` function:
 ```C
  int pthread_join(pthread_t thread, void **retval);
 ```
@@ -195,24 +195,40 @@ int kill(pid_t pid, int sig);
 <img width="531" alt="Screen Shot 2023-01-05 at 17 05 49" src="https://user-images.githubusercontent.com/80905157/210871287-2ad356f6-bb16-475e-ba83-9a4530c2cc03.png">
 
 </h3>
+
 ## Resources
-- Linux Programmer’s Manual:
-- 
-- [fork (2)](https://linux.die.net/man/2/fork)
-- [wait (2)](https://linux.die.net/man/2/wait)
-- [kill (2)](https://linux.die.net/man/2/kill)
-- [signal (7)](https://www.man7.org/linux/man-pages/man7/signal.7.html)
-- [pthread_create(3) ](https://linux.die.net/man/3/pthread_create)
-- [pthread_mutex_init/lock/unlock(3)](https://linux.die.net/man/3/pthread_mutex_init)
-- [pthread_detach(3)](https://linux.die.net/man/3/pthread_detach)
-- [pthread_join(3)](https://linux.die.net/man/3/pthread_join)
-- 
+ 
 - [Wikipedia, init](https://en.wikipedia.org/wiki/Init)
+ 
 - [Geeks for Geeks, fork() in C ](https://www.geeksforgeeks.org/fork-system-call/)
+ 
 - [Aline, Les processus zombies](https://www.it-connect.fr/les-processus-zombies/)
+ 
 - [Tecmint, All You Need To Know About Processes in Linux](https://www.tecmint.com/linux-process-management/)
+
 - [Wikipedia, Concurrent computing](https://en.wikipedia.org/wiki/Concurrent_computing)
+
 - [Wikipedia, Mutual exclusion](https://en.wikipedia.org/wiki/Mutual_exclusion)
+
 - [Data Race](https://stackoverflow.com/questions/34510/what-is-a-race-condition/34550#34550)
+
 - [Valgrind User Manual, Helgrind: a thread error detector](https://cs.swan.ac.uk/~csoliver/ok-sat-library/internet_html/doc/doc/Valgrind/3.8.1/html/hg-manual.html)
+
 - [Valgrind User Manual, DRD: a thread error detector](https://valgrind.org/docs/manual/drd-manual.html)
+
+##### ``Linux Programmer’s Manual:``
+ 
+- [fork (2)](https://linux.die.net/man/2/fork)
+
+- [wait (2)](https://linux.die.net/man/2/wait)
+
+- [kill (2)](https://linux.die.net/man/2/kill)
+
+- [signal (7)](https://www.man7.org/linux/man-pages/man7/signal.7.html)
+  [pthread_create(3) ](https://linux.die.net/man/3/pthread_create)
+  
+- [pthread_mutex_init/lock/unlock(3)](https://linux.die.net/man/3/pthread_mutex_init)
+ 
+- [pthread_detach(3)](https://linux.die.net/man/3/pthread_detach)
+ 
+- [pthread_join(3)](https://linux.die.net/man/3/pthread_join)
