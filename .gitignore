@@ -1,0 +1,5 @@
+.vscode/*
+.DS_STORE
+*.o
+*.lib
+*.dSYM/
