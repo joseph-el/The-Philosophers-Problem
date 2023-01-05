@@ -40,12 +40,12 @@
 
 * [About](#about-project)
 * [Understanding Concepts](#understanding-concepts)
-* [Understand Thread](#what-is-a-thread?)
-* [Understand Processing and Semaphore](#Understand Processing-and-Semaphore)
-* [What is a Process?](#cloning-the-repositories)
-* [Source](#source)
-* [Screenshot ](#screenshot)
-* [Summary](#summary)
+* [Understand Thread](#what-is-a-thread)
+* [Understand Processing and Semaphore](#understand-processing-and-semaphore)
+* [What is a Process?](#what-is-a-process)
+* [Semaphores](#semaphores)
+* [Screenshot](#screenshot)
+* [Resources](#resources)
 
  ## About project
 - This project is about the ``Dining Philosophers problem`` is a classic OS problem that’s usuallu stated in very non-OS terms:
@@ -53,7 +53,7 @@ There are N philosphers sitting around a circular table eating spaghetti and dis
 
 ## Understanding Concepts
 ### Understand Threads and mutexes
-#### What is a Thread?
+#### What is a Thread
 - An execution thread is a logical sequence of instructions inside a process that is automatically managed by the operating system’s kernel. A regular sequential program has a single thread, but modern operating systems allow us to create several threads in our programs, all of which run in parallel.
 ##### > Using POSIX Threads
 - The standard interface in C to manipulate threads is POSIX with its ``<pthread.h>`` library. It contains around sixty functions to create and join threads, as well as to manage their shared memory. We will only study a fraction of these in this article. In order to compile a program using this library, we can’t forget to link it with -pthread:
@@ -169,14 +169,14 @@ pid_t waitpid(pid_t pid, int *status, int options);
 ``options:`` waitpid offers several options. Among those, the sometimes very useful WNOHANG. With the WNOHANG option, waitpid returns immediately if the child process has not ended yet. Without this option, the parent process will by default remain suspended as long as the child is still executing its tasks.
 - If the system call succeeds, both wait and waitpid return the terminated child’s PID.
 ### Analyzing a Child Process’ Exit Status
-- The wait and waitpid functions provide us with a status that contains a lot of information about the way in which a child process finished its execution. The status is an integer that represents not only the exit code but also further details that explain why a child exited. So we can easily tell if a child really finished all of its tasks or if it was interrupted.
+- The ``wai``t and ``waitpid functions provide us with a status that contains a lot of information about the way in which a child process finished its execution. The status is an integer that represents not only the exit code but also further details that explain why a child exited. So we can easily tell if a child really finished all of its tasks or if it was interrupted.
 - We can inspect the status thanks to several macros:
 ```C
 WIFEXITED(status);
 WEXITSTATUS(status);
 ```
-- WIFEXITED(status): returns true if the child terminated normally.
-- WEXITSTATUS(status): to be used only if WIFEXITED returned true. Returns the child’s exit code.
+- ``WIFEXITED(status):`` returns true if the child terminated normally.
+- ``WEXITSTATUS(status):`` to be used only if WIFEXITED returned true. Returns the child’s exit code.
 ### Kill: Terminating Child Processes
 - It may be a touch sinister, but we can kill our child process if we so desire. To do so, we need to use the ``kill`` function of the ``<signal.h>`` library to send a signal to the child process that will force it to terminate immediately. The function’s prototype is:
 ```C
