@@ -39,10 +39,10 @@
 ### Table of Contents
 
 * [About](#about-project)
-* [Game rules](#game-rules)
-* [How it works](#how-it-works)
-* [Controls](#control)
-* [Installation](#cloning-the-repositories)
+* [Understanding Concepts](#understanding-concepts)
+* [Understand Thread](#what-is-a-thread?)
+* [Understand Processing and Semaphore](#Understand Processing-and-Semaphore)
+* [What is a Process?](#cloning-the-repositories)
 * [Source](#source)
 * [Screenshot ](#screenshot)
 * [Summary](#summary)
@@ -186,6 +186,35 @@ int kill(pid_t pid, int sig);
 
 - ``pid:`` the PID of the process that we want to kill.
 - ``sig:`` the signal that we want to send to the process in order to kill it. There are many different possible signals for kill, each with its own nuances (see man 7 signal), but the most frequently used are perhaps SIGTERM (soft termination signal) and SIGKILL (hard kill signal).
+
+### Semaphores
+#### What is Semaphores
+- A semaphore is a signalling mechanism used to regulate access to a shared resource like a railroad track. A semaphore is used to signal to the driver of a train whether he can go ahead on the track or not, for use semaphore you need to include the ``<semaphore.h>`` in your program.
+#### Semaphore Calls
+##### > sem_open
+```C
+sem_t *sem_open (const char *name, int oflag);
+sem_t *sem_open (const char *name, int oflag, mode_t mode, unsigned int value);
+```
+- ``sem_open`` is the call to get started for a semaphore. sem_open opens an existing semaphore or creates a new semaphore and opens it for further operations.
+##### > sem_post
+```C
+int sem_post (sem_t *sem);
+```
+- ``sem_post`` increments the semaphore, It returns 0 on success and -1 on error.
+
+##### > sem_wait
+```C
+int sem_wait (sem_t *sem);
+```
+- ``sem_wait`` decrements the semaphore pointed by sem. If the semaphore value is non-zero, the decrement happens right away. If the semaphore value is zero, the call blocks till the time semaphore becomes greater than zero and the decrement is done. sem_wait returns zero on success and -1 on error
+
+##### > sem_unlink
+```C
+int sem_unlink (const char *name);
+```
+- ``sem_unlink`` removes the semaphore associated with the name.
+
 ## Screenshot 
 <h3 align="center">
 <img width="1138" alt="Screen Shot 2023-01-05 at 17 07 48" src="https://user-images.githubusercontent.com/80905157/210871248-56df3ede-ee93-4a3a-9448-5a0edc28f804.png">
@@ -198,6 +227,7 @@ int kill(pid_t pid, int sig);
 
 ## Resources
  
+- [Semaphores](https://www.softprayog.in/programming/posix-semaphores)
 - [Wikipedia, init](https://en.wikipedia.org/wiki/Init)
  
 - [Geeks for Geeks, fork() in C ](https://www.geeksforgeeks.org/fork-system-call/)
@@ -225,7 +255,8 @@ int kill(pid_t pid, int sig);
 - [kill (2)](https://linux.die.net/man/2/kill)
 
 - [signal (7)](https://www.man7.org/linux/man-pages/man7/signal.7.html)
-  [pthread_create(3) ](https://linux.die.net/man/3/pthread_create)
+
+- [pthread_create(3) ](https://linux.die.net/man/3/pthread_create)
   
 - [pthread_mutex_init/lock/unlock(3)](https://linux.die.net/man/3/pthread_mutex_init)
  
