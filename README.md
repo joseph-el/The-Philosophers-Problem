@@ -105,7 +105,7 @@ int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *mutexa
 
 - Then, in order to lock and unlock our mutex, we need two other functions. Their prototypes are as follows:
 ```C
-int pthread_mutex_lock(pthread_mutex_t *mutex));
+int pthread_mutex_lock(pthread_mutex_t *mutex);
 int pthread_mutex_unlock(pthread_mutex_t *mutex);
 ```
 - If the mutex is unlocked, pthread_mutex_lock locks it and the calling thread becomes its owner. In this case, the function ends immediately. However, if the mutex is already locked by another thread, pthread_mutex_lock suspends the execution of the calling thread until the mutex is unlocked.
