@@ -152,24 +152,24 @@ int main(void)
 
 #### ``Note:`` The Memory Duplicated but Not Shared
 - As we’ve seen, a child process is an exact copy of its parent process. When a child is created, it is identical to its parent in every way. It has the same code, the same open file descriptors, the same data stored in memory, etc. But the fact that this memory is identical does not mean it is shared between the two processes. If the parent process changes the value of one of its variables after creating the child, the child process will not see any change when it reads the same variable.
-### The Wait and Waitpid System Calls
-- In order to suspend the parent process’ execution until the child process’ state changes, we can use the wait or waitpid system calls from the ``<sys/wait.h>`` library. Their prototypes are:
+### The ``Wait`` and ``Waitpid`` System Calls
+- In order to suspend the parent process’ execution until the child process’ state changes, we can use the ``wait`` or ``waitpid`` system calls from the ``<sys/wait.h>`` library. Their prototypes are:
 ```C
 pid_t wait(int *status);
-pid_t waitpid(pid_t pid, int *status, int options);
+pid_t ``waitpid``(pid_t pid, int *status, int options);
 ```
-- The difference between the two is especially noticeable when a process has several children. The wait call will retrieve the first terminated child, whereas waitpid holds out for the child matching the PID that we indicated and ignores all of the others. Also, waitpid allows us to specify a few options.
+- The difference between the two is especially noticeable when a process has several children. The wait call will retrieve the first terminated child, whereas ``waitpid`` holds out for the child matching the PID that we indicated and ignores all of the others. Also, ``waitpid`` allows us to specify a few options.
 - The common parameter to both system calls is:
 
-``status:`` a pointer to an integer type variable in which wait and waitpid can store the child’s exit status. We will be able to examine this number with different macros to determine if the child finished normally or was interrupted, among other things.
+``status:`` a pointer to an integer type variable in which wait and ``waitpid`` can store the child’s exit status. We will be able to examine this number with different macros to determine if the child finished normally or was interrupted, among other things.
 
 - The two extra parameters of ``waitpid`` are as follows:
 
 - ``pid:`` the PID of the child process we should wait for. The parent process knows this PID because it’s the return value that fork provided when the child was created. Alternatively, we can specify -1 in order to wait for whichever child finished first, just like wait (indeed, waitpid(-1, status, 0) is exactly the same as wait(status).)
-``options:`` waitpid offers several options. Among those, the sometimes very useful WNOHANG. With the WNOHANG option, waitpid returns immediately if the child process has not ended yet. Without this option, the parent process will by default remain suspended as long as the child is still executing its tasks.
-- If the system call succeeds, both wait and waitpid return the terminated child’s PID.
+``options:`` ``waitpid`` offers several options. Among those, the sometimes very useful WNOHANG. With the WNOHANG option, ``waitpid`` returns immediately if the child process has not ended yet. Without this option, the parent process will by default remain suspended as long as the child is still executing its tasks.
+- If the system call succeeds, both wait and ``waitpid`` return the terminated child’s PID.
 ### Analyzing a Child Process’ Exit Status
-- The ``wai``t and ``waitpid functions provide us with a status that contains a lot of information about the way in which a child process finished its execution. The status is an integer that represents not only the exit code but also further details that explain why a child exited. So we can easily tell if a child really finished all of its tasks or if it was interrupted.
+- The ``wait`` and ``waitpid`` functions provide us with a status that contains a lot of information about the way in which a child process finished its execution. The status is an integer that represents not only the exit code but also further details that explain why a child exited. So we can easily tell if a child really finished all of its tasks or if it was interrupted.
 - We can inspect the status thanks to several macros:
 ```C
 WIFEXITED(status);

@@ -6,7 +6,7 @@
 #    By: yoel-idr <yoel-idr@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/31 14:30:34 by yoel-idr          #+#    #+#              #
-#    Updated: 2023/01/05 19:14:06 by yoel-idr         ###   ########.fr        #
+#    Updated: 2023/01/06 11:56:18 by yoel-idr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ RM   := rm -f
 all : $(NAME)
 	@echo "\n\033[0;32m<Dining Philosophers Problem>\033[0m"
 	@echo "\nFor the students 42 who want to apply ur tests,\n"
-	@echo "I want to tell u that this version of the project does not handle\n"
+	@echo "I want to tell u this version of the project does not handle\n"
 	@echo "all tests like the version in my profile at intra 😃\n"
 
 $(NAME) : $(OBJ)
