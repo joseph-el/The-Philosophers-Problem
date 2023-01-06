@@ -156,7 +156,7 @@ int main(void)
 - In order to suspend the parent process’ execution until the child process’ state changes, we can use the ``wait`` or ``waitpid`` system calls from the ``<sys/wait.h>`` library. Their prototypes are:
 ```C
 pid_t wait(int *status);
-pid_t ``waitpid``(pid_t pid, int *status, int options);
+pid_t waitpid(pid_t pid, int *status, int options);
 ```
 - The difference between the two is especially noticeable when a process has several children. The wait call will retrieve the first terminated child, whereas ``waitpid`` holds out for the child matching the PID that we indicated and ignores all of the others. Also, ``waitpid`` allows us to specify a few options.
 - The common parameter to both system calls is:
