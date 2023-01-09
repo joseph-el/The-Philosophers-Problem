@@ -66,7 +66,7 @@ int main(void)
     {
         // init the struct t_prc for childs
         memset(&childs[i], 0, sizeof(t_prc));
-        childs[i].name = &data;
+        childs[i].data = &data;
         childs[i].age = (i + 1) + 15;
         childs[i].name = strdup("INKONU");
         // creat new process for child (i)
